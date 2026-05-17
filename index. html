@@ -131,17 +131,17 @@
         <div class="time-number" id="hari">08</div>
         <div class="time-label">Hari</div>
       </div>
-      <div class="separator">·</div>
+      <div class="separator">Â·</div>
       <div class="time-block" id="block-jam">
         <div class="time-number" id="jam">21</div>
         <div class="time-label">Jam</div>
       </div>
-      <div class="separator">·</div>
+      <div class="separator">Â·</div>
       <div class="time-block" id="block-menit">
         <div class="time-number" id="menit">40</div>
         <div class="time-label">Menit</div>
       </div>
-      <div class="separator">·</div>
+      <div class="separator">Â·</div>
       <div class="time-block" id="block-detik">
         <div class="time-number" id="detik">00</div>
         <div class="time-label">Detik</div>
