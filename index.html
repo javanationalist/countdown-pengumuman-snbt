@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengumuman Hasil SNBT SNPMB 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #7ec8e3 0%, #5aabcc 30%, #4a9abf 60%, #6abcd4 100%);
+      font-family: 'Poppins', sans-serif;
+      padding: 24px;
+    }
+
+    .card {
+      background: rgba(180, 220, 240, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 36px 32px 40px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+
+    .logo-img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin: 0 auto 24px;
+    }
+
+    .headline {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.45;
+      margin-bottom: 28px;
+      letter-spacing: 0.2px;
+    }
+
+    .countdown-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+    }
+
+    .time-number {
+      font-size: 52px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      font-variant-numeric: tabular-nums;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .time-label {
+      font-size: 14px;
+      font-weight: 400;
+      color: #ffffff;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .separator {
+      font-size: 44px;
+      color: #ffffff;
+      align-self: flex-start;
+      padding-top: 4px;
+      opacity: 0.7;
+      font-weight: 300;
+    }
+
+    .credit {
+      font-size: 13px;
+      color: #ffffff;
+      margin-top: 18px;
+      opacity: 0.85;
+      letter-spacing: 0.2px;
+    }
+
+    .finished-msg {
+      display: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.6;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .pulse .time-number {
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo-img" src="https://snpmb.id/user/themes/editorial/images/logo/logo-snpmb.png" alt="Logo SNPMB" />
+
+    <div class="headline">
+      PENGUMUMAN HASIL SELEKSI<br/>SNBT SNPMB 2026
+    </div>
+
+    <div class="countdown-row" id="countdownRow">
+      <div class="time-block" id="block-hari">
+        <div class="time-number" id="hari">08</div>
+        <div class="time-label">Hari</div>
+      </div>
+      <div class="separator">·</div>
+      <div class="time-block" id="block-jam">
+        <div class="time-number" id="jam">21</div>
+        <div class="time-label">Jam</div>
+      </div>
+      <div class="separator">·</div>
+      <div class="time-block" id="block-menit">
+        <div class="time-number" id="menit">40</div>
+        <div class="time-label">Menit</div>
+      </div>
+      <div class="separator">·</div>
+      <div class="time-block" id="block-detik">
+        <div class="time-number" id="detik">00</div>
+        <div class="time-label">Detik</div>
+      </div>
+    </div>
+
+    <div class="finished-msg" id="finishedMsg">Hasil telah diumumkan. Kini saatnya mendengar kabar baik dari para pejuang PTN!</div>
+
+    <div class="credit"></div>
+  </div>
+
+  <script>
+    const targetDate = new Date('2026-05-25T08:00:00Z');
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('hari').textContent   = '00';
+        document.getElementById('jam').textContent    = '00';
+        document.getElementById('menit').textContent  = '00';
+        document.getElementById('detik').textContent  = '00';
+        document.getElementById('countdownRow').style.display = 'none';
+        document.getElementById('finishedMsg').style.display = 'block';
+        ['block-hari','block-jam','block-menit','block-detik'].forEach(id => {
+          document.getElementById(id).classList.add('pulse');
+        });
+        clearInterval(timer);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days    = Math.floor(totalSeconds / 86400);
+      const hours   = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById('hari').textContent   = pad(days);
+      document.getElementById('jam').textContent    = pad(hours);
+      document.getElementById('menit').textContent  = pad(minutes);
+      document.getElementById('detik').textContent  = pad(seconds);
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    // Auto fullscreen saat halaman dibuka
+    function requestFullscreen() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      } else if (el.mozRequestFullScreen) {
+        el.mozRequestFullScreen();
+      } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+      }
+    }
+
+    // Browser mengharuskan fullscreen dipicu oleh interaksi user.
+    // Jika auto gagal, tampilkan tombol klik untuk masuk fullscreen.
+    window.addEventListener('load', function () {
+      requestFullscreen();
+    });
+
+    document.addEventListener('click', function () {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        requestFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
