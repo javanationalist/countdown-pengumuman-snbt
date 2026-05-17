@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   <title>Pengumuman Hasil SNBT SNPMB 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
@@ -10,84 +10,91 @@
 
     body {
       min-height: 100vh;
+      min-height: 100dvh; /* dynamic viewport height for mobile browsers */
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(160deg, #7ec8e3 0%, #5aabcc 30%, #4a9abf 60%, #6abcd4 100%);
       font-family: 'Poppins', sans-serif;
-      padding: 24px;
+      padding: 16px;
     }
 
     .card {
       background: rgba(180, 220, 240, 0.45);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-radius: 12px;
-      padding: 36px 32px 40px;
+      border-radius: 16px;
+      padding: clamp(24px, 5vw, 40px) clamp(20px, 5vw, 36px);
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       text-align: center;
       box-shadow: 0 8px 32px rgba(0,0,0,0.10);
     }
 
     .logo-img {
       width: 100%;
-      max-width: 320px;
+      max-width: 280px;
       height: auto;
       display: block;
-      margin: 0 auto 24px;
+      margin: 0 auto 20px;
     }
 
     .headline {
-      font-size: 17px;
+      font-size: clamp(13px, 3.5vw, 17px);
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.45;
-      margin-bottom: 28px;
+      line-height: 1.5;
+      margin-bottom: 24px;
       letter-spacing: 0.2px;
     }
 
     .countdown-row {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      align-items: flex-start;
+      gap: clamp(4px, 2vw, 12px);
       margin-bottom: 10px;
+      flex-wrap: nowrap;
     }
 
     .time-block {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 60px;
+      flex: 1;
+      min-width: 0; /* allow shrinking */
     }
 
     .time-number {
-      font-size: 52px;
+      font-size: clamp(32px, 10vw, 54px);
       font-weight: 400;
       color: #ffffff;
       line-height: 1;
       letter-spacing: -1px;
       text-shadow: 0 2px 8px rgba(0,0,0,0.10);
       font-variant-numeric: tabular-nums;
-      min-width: 60px;
+      width: 100%;
       text-align: center;
     }
 
     .time-label {
-      font-size: 14px;
+      font-size: clamp(10px, 2.5vw, 14px);
       font-weight: 400;
       color: #ffffff;
       margin-top: 4px;
       letter-spacing: 0.3px;
+      white-space: nowrap;
     }
 
     .separator {
-      font-size: 44px;
+      font-size: clamp(28px, 8vw, 46px);
       color: #ffffff;
       align-self: flex-start;
-      padding-top: 4px;
+      padding-top: 2px;
       opacity: 0.7;
       font-weight: 300;
+      flex-shrink: 0;
+      line-height: 1;
     }
 
     .credit {
@@ -100,7 +107,7 @@
 
     .finished-msg {
       display: none;
-      font-size: 16px;
+      font-size: clamp(13px, 3.5vw, 16px);
       font-weight: 600;
       color: #ffffff;
       line-height: 1.6;
@@ -115,6 +122,23 @@
 
     .pulse .time-number {
       animation: pulse 0.8s ease-in-out infinite;
+    }
+
+    /* Tablet */
+    @media (min-width: 480px) {
+      .card {
+        padding: 36px 32px 40px;
+      }
+      .logo-img {
+        max-width: 320px;
+      }
+    }
+
+    /* Small mobile (< 360px) */
+    @media (max-width: 359px) {
+      .countdown-row {
+        gap: 2px;
+      }
     }
   </style>
 </head>
@@ -207,8 +231,6 @@
       }
     }
 
-    // Browser mengharuskan fullscreen dipicu oleh interaksi user.
-    // Jika auto gagal, tampilkan tombol klik untuk masuk fullscreen.
     window.addEventListener('load', function () {
       requestFullscreen();
     });
